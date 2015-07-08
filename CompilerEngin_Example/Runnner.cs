@@ -80,6 +80,15 @@ s==10;
 1==1;
 ";
       }
+      else if (selector == 11)
+      {
+        ret = @"
+if(1 < 2)
+  ""less""
+else
+  ""greater""
+";
+      }
       else
       {
         return "";
@@ -91,7 +100,7 @@ s==10;
     {
       Console.WriteLine("");
       //var items = new int[] { 0, 1, 2, 3, 4 };
-      var items = new int[] {10};
+      var items = new int[] {11};
 
       foreach (var s in items)
       {

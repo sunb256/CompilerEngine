@@ -40,7 +40,7 @@ namespace CompilerEngine
     private Ast Program()
     {
       _token.Next();
-      var code = Expression();
+      var code = Statement();
 
       if (code == null)
         return null;
@@ -56,6 +56,62 @@ namespace CompilerEngine
 
       return code;
     }
+
+    // [構文] 文
+    private Ast Statement()
+    {
+      Ast result = null;
+
+      switch (_token.Value)
+      {
+        case TokenType.IF:
+          result = If_Statement();
+          break;
+
+        default:
+          result = Expression();
+          break;
+      }
+
+      return result;
+    }
+
+
+
+    // [構文] if文
+    private Ast If_Statement()
+    {
+      Ast result = null;
+
+      // (
+      _token.Next();
+      if (_token.Value != TokenType.APER)
+        throw new Exception("parser error :: grammer error not '(' in If_Statement");
+
+      // 式
+      _token.Next();
+      Ast if_condition = Expression();
+
+      // )
+      if (_token.Value != TokenType.OPER)
+        throw new Exception("parser error :: grammer error not ')' in If_Statement");
+
+      // 文
+      _token.Next();
+      Ast stmt_1 = Statement();
+      Ast stmt_2 = null;
+
+      // else 文
+      if (_token.Value == TokenType.ELSE)
+      {
+        _token.Next();
+        stmt_2 = Statement();
+      }
+
+      result = new AstIf(if_condition, stmt_1, stmt_2);
+      return result;
+    }
+
 
     // [構文] 式
     private Ast Expression()

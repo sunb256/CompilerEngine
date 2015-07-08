@@ -44,6 +44,7 @@
     <Compile Include="01_Scanner\SourceReader.cs" />
     <Compile Include="03_Node\Expression\AstAssign.cs" />
     <Compile Include="03_Node\Expression\AstExpr.cs" />
+    <Compile Include="03_Node\Statement\AstIf.cs" />
     <Compile Include="03_Node\Type\AstBool.cs" />
     <Compile Include="03_Node\Type\AstMinus.cs" />
     <Compile Include="03_Node\Type\AstNot.cs" />

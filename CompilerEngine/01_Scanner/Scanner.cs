@@ -16,8 +16,12 @@ namespace CompilerEngine
     public Char Char { get { return this._reader.Result; } }
 
     private static CodeDomProvider _p;
-
     private SourceReader _reader;
+
+    private static string R_IF = "if";
+    private static string R_ELSE = "else";
+    private static string R_TRUE = "true";
+    private static string R_FALSE = "false";
 
     public enum ScanResult
     {
@@ -232,13 +236,22 @@ namespace CompilerEngine
               _reader.UnRead();
               this.Val = ScanSymbol();
 
-              if ((string)this.Val == "true")
+              // 予約語token
+              if ((string)this.Val == R_TRUE)
               {
                 this.Type = TokenType.TRUE;
               }
-              else if ((string)this.Val == "false")
+              else if ((string)this.Val == R_FALSE)
               {
                 this.Type = TokenType.FALSE;
+              }
+              else if ((string)this.Val == R_IF)
+              {
+                this.Type = TokenType.IF;
+              }
+              else if ((string)this.Val == R_ELSE)
+              {
+                this.Type = TokenType.ELSE;
               }
               else
               {
@@ -248,7 +261,7 @@ namespace CompilerEngine
             }
             else
             {
-              throw new Exception("scanner error :: not digit");
+              throw new Exception("scanner error :: not symbol or digit");
             }
             break;
         }
@@ -379,7 +392,6 @@ namespace CompilerEngine
         c = (char)_reader.Read();
         str += c.ToString();
 
-
         if (_reader.IsEof)
         {
           throw new Exception("scanner error :: comment is eof");
@@ -396,6 +408,9 @@ namespace CompilerEngine
           break;
         }
       }
+
+
+
       return str;
     }
 

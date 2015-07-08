@@ -79,6 +79,13 @@ namespace CompilerEngine
     /// <summary> false </summary>
     FALSE,
 
+
+    /// <summary> if </summary>
+    IF,
+
+    /// <summary> else </summary>
+    ELSE,
+
     /// <summary>NULL</summary>
     NULL,
   }
