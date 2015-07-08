@@ -36,6 +36,7 @@ namespace CompilerEngine
       {
         try
         {
+          // コードをAstに解析
           result = Engine.Yacc.Parse();
         }
         catch (Exception ex)
@@ -43,6 +44,7 @@ namespace CompilerEngine
           return String.Format("[Result] NG >>> {0}\n\n{1}", ex.Message, Yacc.History.Dump());
         }
 
+        // Astを実行
         if (result != null)
           ret += result.Run().ToString() + "\n";
         

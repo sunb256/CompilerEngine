@@ -26,5 +26,39 @@ namespace CompilerEngine
     {
       return _value == true ? true : false;
     }
+
+
+    public override Ast And(Ast code)
+    {
+      if (_value)
+      {
+        var ret = (AstBool)code.Run();
+        if (ret._value)
+          return new AstBool(true);
+        else
+          return new AstBool(false);
+      }
+      else
+      {
+        return new AstBool(false);
+      }
+    }
+
+    public override Ast Or(Ast code)
+    {
+      if (_value)
+      {
+        return new AstBool(true);
+      }
+      else
+      {
+        var ret = (AstBool)code.Run();
+        if (ret._value)
+          return new AstBool(true);
+        else
+          return new AstBool(false);
+      }
+    }
+
   }
 }

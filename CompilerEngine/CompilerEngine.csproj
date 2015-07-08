@@ -46,6 +46,7 @@
     <Compile Include="03_Node\Expression\AstExpr.cs" />
     <Compile Include="03_Node\Type\AstBool.cs" />
     <Compile Include="03_Node\Type\AstMinus.cs" />
+    <Compile Include="03_Node\Type\AstNot.cs" />
     <Compile Include="03_Node\Type\AstString.cs" />
     <Compile Include="03_Node\Valiable\AstValiable.cs" />
     <Compile Include="04_Common\Token.cs" />

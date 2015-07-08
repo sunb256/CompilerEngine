@@ -55,6 +55,53 @@ namespace CompilerEngine
       return new AstInt(val1 / val2);
     }
 
+    public override Ast Lt(Ast code)
+    {
+      var val1 = this.Value;
+      var val2 = ((AstInt)code).Value;
+
+      return (val1 < val2) ? new AstBool(true) : new AstBool(false);
+    }
+
+    public override Ast Gt(Ast code)
+    {
+      var val1 = this.Value;
+      var val2 = ((AstInt)code).Value;
+
+      return (val1 > val2) ? new AstBool(true) : new AstBool(false);
+    }
+
+    public override Ast Eq(Ast code)
+    {
+      var val1 = this.Value;
+      var val2 = ((AstInt)code).Value;
+
+      return (val1 == val2) ? new AstBool(true) : new AstBool(false);
+    }
+
+    public override Ast Ne(Ast code)
+    {
+      var val1 = this.Value;
+      var val2 = ((AstInt)code).Value;
+
+      return (val1 != val2) ? new AstBool(true) : new AstBool(false);
+    }
+
+    public override Ast Le(Ast code)
+    {
+      var val1 = this.Value;
+      var val2 = ((AstInt)code).Value;
+
+      return (val1 <= val2) ? new AstBool(true) : new AstBool(false);
+    }
+
+    public override Ast Ge(Ast code)
+    {
+      var val1 = this.Value;
+      var val2 = ((AstInt)code).Value;
+
+      return (val1 >= val2) ? new AstBool(true) : new AstBool(false);
+    }
 
   }
 }

@@ -13,7 +13,37 @@ namespace CompilerEngine
 
     /// <summary>string</summary>
     STRING,
-    
+
+    /// <summary> = </summary>
+    EQUAL,
+
+    /// <summary> == </summary>
+    EQ,
+
+    /// <summary> ! (exclamation mark) </summary>
+    EX,
+
+    /// <summary> != </summary>
+    NE,
+
+    /// <summary> ＜ </summary>
+    LT,
+
+    /// <summary> ＜= </summary>
+    LE,
+
+    /// <summary> ＞ </summary>
+    GT,
+
+    /// <summary> ＞= </summary>
+    GE,
+
+    /// <summary> && </summary>
+    AND,
+
+    /// <summary> || </summary>
+    OR,
+
     /// <summary> + </summary>
     PLUS,
     
@@ -38,8 +68,7 @@ namespace CompilerEngine
     /// <summary> ) </summary>
     OPER,
 
-    /// <summary> = </summary>
-    EQUAL,
+
 
     /// <summary> Valiable </summary>
     VALIABLE,
@@ -68,8 +97,35 @@ namespace CompilerEngine
     /// <summary> / </summary>
     DIVIDE,
 
-    /// <summary> / </summary>
+    /// <summary> = </summary>
     EQUAL,
+
+    /// <summary> == </summary>
+    EQ,
+
+    /// <summary> ! (exclamation mark) </summary>
+    EX,
+
+    /// <summary> != </summary>
+    NE,
+
+    /// <summary> ＜ </summary>
+    LT,
+
+    /// <summary> ＜= </summary>
+    LE,
+
+    /// <summary> ＞ </summary>
+    GT,
+
+    /// <summary> ＞= </summary>
+    GE,
+
+    /// <summary> && </summary>
+    AND,
+
+    /// <summary> || </summary>
+    OR,
 
     /// <summary> none operator </summary>
     NULL,

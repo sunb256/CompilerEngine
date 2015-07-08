@@ -73,9 +73,103 @@ namespace CompilerEngine
             break;
 
           case '=':
-            this.Type = TokenType.EQUAL;
-            this.Val = this.Char.ToString();
+
+            this.Val = (string)ScanEqual(ch);
+
+            // == の場合
+            if ((string)this.Val == "==")
+            {
+              this.Type = TokenType.EQ;
+            }
+            // = の場合
+            else
+            {
+              _reader.UnRead();
+              this.Type = TokenType.EQUAL;
+            }
             break;
+
+          case '!': 
+
+            this.Val = (string)ScanExmark(ch);
+
+            // != の場合
+            if ((string)this.Val == "!=")
+            {
+              this.Type = TokenType.EQ;
+            }
+            // ! の場合
+            else
+            {
+              _reader.UnRead();
+              this.Type = TokenType.EQUAL;
+            }
+            break;
+
+          case '<':
+
+            this.Val = (string)ScanLess(ch);
+
+            // <= の場合
+            if ((string)this.Val == "<=")
+            {
+              this.Type = TokenType.LE;
+            }
+            // < の場合
+            else
+            {
+              _reader.UnRead();
+              this.Type = TokenType.LT;
+            }
+            break;
+
+          case '>':
+
+            this.Val = (string)ScanGreater(ch);
+
+            // >= の場合
+            if ((string)this.Val == ">=")
+            {
+              this.Type = TokenType.GE;
+            }
+            // > の場合
+            else
+            {
+              _reader.UnRead();
+              this.Type = TokenType.GT;
+            }
+            break;
+
+          case '&':
+
+            this.Val = (string)ScanAndOp(ch);
+
+            // && の場合
+            if ((string)this.Val == "&&")
+            {
+              this.Type = TokenType.AND;
+            }
+            else
+            {
+              throw new Exception("scanner error :: not && (and operator)");
+            }
+            break;
+
+          case '|':
+
+            this.Val = (string)ScanOrOp(ch);
+
+            // || の場合
+            if ((string)this.Val == "||")
+            {
+              this.Type = TokenType.OR;
+            }
+            else
+            {
+              throw new Exception("scanner error :: not || (or operator)");
+            }
+            break;
+
 
           case '+':
             this.Type = TokenType.PLUS;
@@ -102,12 +196,12 @@ namespace CompilerEngine
             c = _reader.Read();
             if (c == '/')
             {
-              skipLineComment();
+              SkipLineComment();
               return this.Next();
             }
             else if (c == '*')
             {
-              skipMultiComment();
+              SkipMultiComment();
               return this.Next();
             }
             else
@@ -138,11 +232,11 @@ namespace CompilerEngine
               _reader.UnRead();
               this.Val = ScanSymbol();
 
-              if (this.Val == "true")
+              if ((string)this.Val == "true")
               {
                 this.Type = TokenType.TRUE;
               }
-              else if (this.Val == "false")
+              else if ((string)this.Val == "false")
               {
                 this.Type = TokenType.FALSE;
               }
@@ -170,7 +264,7 @@ namespace CompilerEngine
 
 
     // コメント
-    private void skipLineComment()
+    private void SkipLineComment()
     {
       Char c = ' ';
       while (c != '\n')
@@ -187,7 +281,7 @@ namespace CompilerEngine
     }
 
     // 複数コメント
-    private void skipMultiComment()
+    private void SkipMultiComment()
     {
       Char c = ' ';
       while (true)
@@ -294,6 +388,54 @@ namespace CompilerEngine
           break;
         }
       }
+      return str;
+    }
+
+
+    // = 演算子を評価
+    private string ScanEqual(char currentValue)
+    {
+      return _ScanOperator(currentValue);
+    }
+
+    // ! 演算子を評価
+    private string ScanExmark(char currentValue)
+    {
+      return _ScanOperator(currentValue);
+    }
+
+    // < 演算子を評価
+    private string ScanLess(char currentValue)
+    {
+      return _ScanOperator(currentValue);
+    }
+
+    // > 演算子を評価
+    private string ScanGreater(char currentValue)
+    {
+      return _ScanOperator(currentValue);
+    }
+
+    // && 演算子を評価
+    private string ScanAndOp(char currentValue)
+    {
+      return _ScanOperator(currentValue);
+    }
+
+    // || 演算子を評価
+    private string ScanOrOp(char currentValue)
+    {
+      return _ScanOperator(currentValue);
+    }
+
+    // ! 演算子を評価
+    private string _ScanOperator(char currentValue)
+    {
+      string str = currentValue.ToString();
+      char c = (char)_reader.Read();
+
+      str += c;
+
       return str;
     }
 

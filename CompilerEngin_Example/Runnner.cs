@@ -65,6 +65,13 @@ s2 = ""World!"";
 s1 + s2;
 ";
       }
+      else if (selector == 9)
+      {
+        ret = @"
+1==2;
+1==1;
+";
+      }
       else
       {
         return "";
@@ -76,7 +83,7 @@ s1 + s2;
     {
       Console.WriteLine("");
       //var items = new int[] { 0, 1, 2, 3, 4 };
-      var items = new int[] {8};
+      var items = new int[] {9};
 
       foreach (var s in items)
       {

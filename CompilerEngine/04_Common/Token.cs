@@ -36,6 +36,18 @@ namespace CompilerEngine
           return Operator.MULTI;
         case TokenType.DIVIDE:
           return Operator.DIVIDE;
+
+        case TokenType.EQ:
+          return Operator.EQ;
+        case TokenType.LE:
+          return Operator.LE;
+        case TokenType.GE:
+          return Operator.GE;
+        case TokenType.LT:
+          return Operator.LT;
+        case TokenType.GT:
+          return Operator.GT;
+
         default:
           return Operator.NULL;
       }

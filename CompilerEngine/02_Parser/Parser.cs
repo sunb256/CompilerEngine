@@ -61,24 +61,21 @@ namespace CompilerEngine
     private Ast Expression()
     {
       Ast result = null;
-      Ast code = Term();
+      Ast code = SimpleExpr();
 
       switch (_token.Value)
       {
-        case TokenType.EOS:    // 空のプログラム
-          result = code;
-          break;
-
-        case TokenType.PLUS:
-          result = Expression_Deep(code);
-          break;
-
-        case TokenType.MINUS:
+        case TokenType.LT: // <
+        case TokenType.GT: // >
+        case TokenType.EQ: // ==
+        case TokenType.NE: // !=
+        case TokenType.LE: // <=
+        case TokenType.GE: // >=
           result = Expression_Deep(code);
           break;
 
         default:
-          throw new Exception("parser error :: grammer error");
+          throw new Exception("parser error :: grammer error in Expression");
       }
       return result;
     }
@@ -88,7 +85,60 @@ namespace CompilerEngine
     {
       AstExpr result = null;
 
-      while ((_token.Value == TokenType.PLUS) || (_token.Value == TokenType.MINUS))
+      while ((_token.Value == TokenType.LT) ||  // <
+             (_token.Value == TokenType.GT) ||  // >
+             (_token.Value == TokenType.EQ) ||  // ==
+             (_token.Value == TokenType.NE) ||  // !=
+             (_token.Value == TokenType.LE) ||  // <=
+             (_token.Value == TokenType.GE))    // >=
+      {
+        var op = _token.GetOperator();
+        _token.Next();
+
+        var code_R = SimpleExpr();
+        result = new AstExpr(code_L, op, code_R);
+      }
+      return result;
+    }
+
+
+    // [構文] Simple式
+    private Ast SimpleExpr()
+    {
+      Ast result = null;
+      Ast code = Term();
+
+      switch (_token.Value)
+      {
+        case TokenType.EOS:    // 空のプログラム
+          result = code;
+          break;
+
+        case TokenType.PLUS:
+          result = SimpleExpr_Deep(code);
+          break;
+
+        case TokenType.MINUS:
+          result = SimpleExpr_Deep(code);
+          break;
+
+        case TokenType.OR:
+          result = SimpleExpr_Deep(code);
+          break;
+
+        default:
+          result = code;
+          break;
+      }
+      return result;
+    }
+
+    // [構文] Simple式-2
+    private Ast SimpleExpr_Deep(Ast code_L)
+    {
+      AstExpr result = null;
+
+      while ((_token.Value == TokenType.PLUS) || (_token.Value == TokenType.MINUS) || (_token.Value == TokenType.OR))
       {
         var op = _token.GetOperator();
         _token.Next();
@@ -114,6 +164,10 @@ namespace CompilerEngine
         case TokenType.DIVIDE:
           code = Term_Deep(code);
           break;
+
+        case TokenType.AND:
+          code = Term_Deep(code);
+          break;
       }
       return code;
     }
@@ -123,7 +177,7 @@ namespace CompilerEngine
     {
       AstExpr result = null;
 
-      while ((_token.Value == TokenType.MULTI) || (_token.Value == TokenType.DIVIDE))
+      while ((_token.Value == TokenType.MULTI) || (_token.Value == TokenType.DIVIDE) || (_token.Value == TokenType.AND))
       {
         var op = _token.GetOperator();
         _token.Next();
@@ -167,13 +221,19 @@ namespace CompilerEngine
 
         case TokenType.MINUS:
           _token.Next();
-          var f_ret = Factor();
-          code = new AstMinus(f_ret);
+          var f1_ret = Factor();
+          code = new AstMinus(f1_ret);
+          break;
+
+        case TokenType.EX:
+          _token.Next();
+          var f2_ret = Factor();
+          code = new AstNot(f2_ret);
           break;
 
         case TokenType.APER:
           _token.Next();
-          code = Expression();
+          code = SimpleExpr();
 
           if (_token.Value != TokenType.OPER)
             throw new Exception("parser error :: grammer error :: not ')' mark ");
@@ -191,7 +251,7 @@ namespace CompilerEngine
           {
             _token.Next();
 
-            var assign = Expression();
+            var assign = SimpleExpr();
             code = new AstAssign(sym, assign);
           }
           else
@@ -201,7 +261,7 @@ namespace CompilerEngine
           break;
 
         default:
-          throw new Exception("parser error :: grammer error");
+          throw new Exception("parser error :: grammer error in Factor");
       }
       return code;
     }
