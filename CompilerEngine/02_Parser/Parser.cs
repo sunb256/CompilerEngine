@@ -150,6 +150,16 @@ namespace CompilerEngine
           _token.Next();
           break;
 
+        case TokenType.TRUE:
+          code = new AstBool(true);
+          _token.Next();
+          break;
+
+        case TokenType.FALSE:
+          code = new AstBool(false);
+          _token.Next();
+          break;
+
         case TokenType.INT:
           code = new AstInt((int)_lex.Val);
           _token.Next();

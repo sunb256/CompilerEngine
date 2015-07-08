@@ -136,8 +136,21 @@ namespace CompilerEngine
             else if (isSymbol(ch.ToString()))
             {
               _reader.UnRead();
-              this.Type = TokenType.VALIABLE;
               this.Val = ScanSymbol();
+
+              if (this.Val == "true")
+              {
+                this.Type = TokenType.TRUE;
+              }
+              else if (this.Val == "false")
+              {
+                this.Type = TokenType.FALSE;
+              }
+              else
+              {
+                this.Type = TokenType.VALIABLE;
+              }
+
             }
             else
             {
@@ -278,10 +291,10 @@ namespace CompilerEngine
         }
         else if (!isSymbol(c.ToString()))
         {
-          //_reader.UnRead();
-          return str;
+          break;
         }
       }
+      return str;
     }
 
 

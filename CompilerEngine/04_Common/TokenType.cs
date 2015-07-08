@@ -44,6 +44,12 @@ namespace CompilerEngine
     /// <summary> Valiable </summary>
     VALIABLE,
 
+    /// <summary> true </summary>
+    TRUE,
+
+    /// <summary> false </summary>
+    FALSE,
+
     /// <summary>NULL</summary>
     NULL,
   }
