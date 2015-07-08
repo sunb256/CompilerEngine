@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,10 +87,14 @@ namespace CompilerEngine
     /// <summary> else </summary>
     ELSE,
 
+    /// <summary> while </summary>
+    WHILE,
+
     /// <summary>NULL</summary>
     NULL,
   }
 
+  [DebuggerDisplay("[Operator] : {this.ToString()}")]
   public enum Operator
   {
     /// <summary> + </summary>

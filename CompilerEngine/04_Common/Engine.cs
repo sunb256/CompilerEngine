@@ -71,6 +71,9 @@ namespace CompilerEngine
 
     public static Ast GetValue(AstValiable key)
     {
+      if (!Engine.HasValue(key))
+        throw new Exception(String.Format("'{0}' is not found!", key));
+
       return Engine.Valiables[key.Name];
     }
 

@@ -68,6 +68,10 @@ namespace CompilerEngine
           result = If_Statement();
           break;
 
+        case TokenType.WHILE:
+          result = While_Statement();
+          break;
+
         default:
           result = Expression();
           break;
@@ -90,7 +94,7 @@ namespace CompilerEngine
 
       // 式
       _token.Next();
-      Ast if_condition = Expression();
+      Ast if_cond = Expression();
 
       // )
       if (_token.Value != TokenType.OPER)
@@ -108,7 +112,33 @@ namespace CompilerEngine
         stmt_2 = Statement();
       }
 
-      result = new AstIf(if_condition, stmt_1, stmt_2);
+      result = new AstIf(if_cond, stmt_1, stmt_2);
+      return result;
+    }
+
+    // [構文] While文
+    private Ast While_Statement()
+    {
+      Ast result = null;
+
+      // (
+      _token.Next();
+      if (_token.Value != TokenType.APER)
+        throw new Exception("parser error :: grammer error not '(' in If_Statement");
+
+      // 式
+      _token.Next();
+      Ast while_cond = Expression();
+
+      // )
+      if (_token.Value != TokenType.OPER)
+        throw new Exception("parser error :: grammer error not ')' in If_Statement");
+
+      // 文
+      _token.Next();
+      Ast stmt = Statement();
+
+      result = new AstWhile(while_cond, stmt);
       return result;
     }
 

@@ -22,6 +22,7 @@ namespace CompilerEngine
     private static string R_ELSE = "else";
     private static string R_TRUE = "true";
     private static string R_FALSE = "false";
+    private static string R_WHILE = "while";
 
     public enum ScanResult
     {
@@ -252,6 +253,10 @@ namespace CompilerEngine
               else if ((string)this.Val == R_ELSE)
               {
                 this.Type = TokenType.ELSE;
+              }
+              else if ((string)this.Val == R_WHILE)
+              {
+                this.Type = TokenType.WHILE;
               }
               else
               {

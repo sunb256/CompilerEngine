@@ -10,6 +10,9 @@ namespace CompilerEngine
   [DebuggerDisplay("[AstBool]")]
   public class AstBool : Ast
   {
+    public static AstBool True = new AstBool(true);
+    public static AstBool False = new AstBool(false);
+
     private bool _value;
 
     public AstBool(bool value)

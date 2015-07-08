@@ -89,6 +89,14 @@ else
   ""greater""
 ";
       }
+      else if (selector == 12)
+      {
+        ret = @"
+x = 0;
+while(x < 5)
+  x = x + 1;
+";
+      }
       else
       {
         return "";
@@ -100,7 +108,7 @@ else
     {
       Console.WriteLine("");
       //var items = new int[] { 0, 1, 2, 3, 4 };
-      var items = new int[] {11};
+      var items = new int[] {12};
 
       foreach (var s in items)
       {
