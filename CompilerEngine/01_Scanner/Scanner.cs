@@ -379,12 +379,20 @@ namespace CompilerEngine
         c = (char)_reader.Read();
         str += c.ToString();
 
+
         if (_reader.IsEof)
         {
           throw new Exception("scanner error :: comment is eof");
         }
-        else if (!isSymbol(c.ToString()))
+
+        string tmp = c.ToString();
+        if (!ValidSymbol(tmp))
         {
+          _reader.UnRead();
+
+          if (str.Length >0)
+            str = str.Substring(0, str.Length - 1);
+
           break;
         }
       }
@@ -446,6 +454,15 @@ namespace CompilerEngine
     public bool isSymbol(string str)
     {
       if (_p.IsValidIdentifier(str))
+        return true;
+      else
+        return false;
+    }
+
+    public bool ValidSymbol(string str)
+    {
+      var m = new Regex("[a-zA-Z0-9]").Match(str);
+      if (m.Success)
         return true;
       else
         return false;

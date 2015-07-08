@@ -75,7 +75,8 @@ namespace CompilerEngine
           break;
 
         default:
-          throw new Exception("parser error :: grammer error in Expression");
+          result = code;
+          break;
       }
       return result;
     }

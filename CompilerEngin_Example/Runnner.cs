@@ -72,6 +72,14 @@ s1 + s2;
 1==1;
 ";
       }
+      else if (selector == 10)
+      {
+        ret = @"
+s = 10;
+s==10;
+1==1;
+";
+      }
       else
       {
         return "";
@@ -83,7 +91,7 @@ s1 + s2;
     {
       Console.WriteLine("");
       //var items = new int[] { 0, 1, 2, 3, 4 };
-      var items = new int[] {9};
+      var items = new int[] {10};
 
       foreach (var s in items)
       {
