@@ -20,7 +20,7 @@ namespace CompilerEngine
       var sym_L = (AstValiable)this._code_L;
       var code_R = this._code_R.Run();
 
-      Engine.SetValue(sym_L, code_R);
+      Engine.SetValue(sym_L.Name, code_R);
 
       return code_R;
     }

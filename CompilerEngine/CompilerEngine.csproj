@@ -44,6 +44,9 @@
     <Compile Include="01_Scanner\SourceReader.cs" />
     <Compile Include="03_Node\Expression\AstAssign.cs" />
     <Compile Include="03_Node\Expression\AstExpr.cs" />
+    <Compile Include="03_Node\Func\AstFunc.cs" />
+    <Compile Include="03_Node\Func\AstFunc_Max.cs" />
+    <Compile Include="03_Node\Func\AstFunc_Print.cs" />
     <Compile Include="03_Node\Statement\AstBlock.cs" />
     <Compile Include="03_Node\Statement\AstIf.cs" />
     <Compile Include="03_Node\Statement\AstWhile.cs" />
