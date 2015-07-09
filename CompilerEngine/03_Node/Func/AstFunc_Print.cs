@@ -20,7 +20,7 @@ namespace CompilerEngine
       Ast code = parameter[0];
       Console.WriteLine(code.Run().ToString());
 
-      return null;
+      return this;
     }
 
 

@@ -87,6 +87,11 @@ namespace CompilerEngine
             this.Val = this.Char.ToString();
             break;
 
+          case ',':
+            this.Type = TokenType.COMMA;
+            this.Val = this.Char.ToString();
+            break;
+
           case '=':
 
             this.Val = (string)ScanEqual(ch);

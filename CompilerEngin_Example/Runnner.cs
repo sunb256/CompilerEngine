@@ -109,6 +109,18 @@ while(x <= 10){
 y;
 ";
       }
+      else if (selector == 14)
+      {
+        ret = @"
+print(2*3);
+";
+      }
+      else if (selector == 15)
+      {
+        ret = @"
+print(max(15,14));
+";
+      }
       else
       {
         return "";
@@ -120,7 +132,7 @@ y;
     {
       Console.WriteLine("");
       //var items = new int[] { 0, 1, 2, 3, 4 };
-      var items = new int[] {13};
+      var items = new int[] {15};
 
       foreach (var s in items)
       {

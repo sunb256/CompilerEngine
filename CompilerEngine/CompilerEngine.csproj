@@ -48,6 +48,7 @@
     <Compile Include="03_Node\Func\AstFunc_Max.cs" />
     <Compile Include="03_Node\Func\AstFunc_Print.cs" />
     <Compile Include="03_Node\Statement\AstBlock.cs" />
+    <Compile Include="03_Node\Statement\AstFuncCall.cs" />
     <Compile Include="03_Node\Statement\AstIf.cs" />
     <Compile Include="03_Node\Statement\AstWhile.cs" />
     <Compile Include="03_Node\Type\AstBool.cs" />

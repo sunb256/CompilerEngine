@@ -157,11 +157,11 @@ namespace CompilerEngine
       _token.Next();
 
       // }
-      while (_token.Value != TokenType.BLOCK_OPER) 
+      while (_token.Value != TokenType.BLOCK_OPER)
       {
         // 文を取得
         Ast code = Statement();
-        
+
         if (_token.Value != TokenType.EOS)
         {
           throw new Exception("parser error :: grammer error not ';' in Block_Statement");
@@ -369,12 +369,22 @@ namespace CompilerEngine
           var sym = new AstValiable((string)_lex.Val);
           _token.Next();
 
+          // 変数の場合
           if (_token.Value == TokenType.EQUAL)
           {
             _token.Next();
 
+            // 変数の割当て
             var assign = SimpleExpr();
             code = new AstAssign(sym, assign);
+
+            // 関数の場合
+          }
+          else if (_token.Value == TokenType.APER)
+          {
+
+            code = MethodCall(sym);
+
           }
           else
           {
@@ -386,6 +396,47 @@ namespace CompilerEngine
           throw new Exception("parser error :: grammer error in Factor");
       }
       return code;
+    }
+
+    private Ast MethodCall(AstValiable sym)
+    {
+      _token.Next();
+      var codeList = Args();
+
+      if (_token.Value != TokenType.OPER)
+        throw new Exception("parser error :: grammer error in MethodCall");
+
+      _token.Next();
+
+      var result = new AstFuncCall(sym, codeList);
+      return result;
+    }
+
+    private List<Ast> Args()
+    {
+      var codeList = new List<Ast>();
+
+      if (_token.Value == TokenType.OPER)
+        return codeList;
+
+
+      var code = Expression();
+      codeList.Add(code);
+
+      while (_token.Value != TokenType.OPER)
+      {
+        if (_token.Value != TokenType.COMMA)
+        {
+          throw new Exception("parser error :: grammer error in Args");
+        }
+
+        _token.Next();
+
+        var code2 = Expression();
+        codeList.Add(code2);
+      }
+
+      return codeList;
     }
 
 

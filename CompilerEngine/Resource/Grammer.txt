@@ -168,7 +168,31 @@
 '  引数                ::= [ 式 [ ',' 式 ] * ]
 '
 '-------------------------------------------------------------------------------------
-
+'---------------------------------------------------------------------------------------------
+'  Program    ::= Expression ';'
+'  Statement  ::= if stmt 
+                | while stmt
+                | block stmt
+                | Expression
+'  if stmt    ::= 'if    (' Expression ')' Statement [ 'else' Statement ]
+'  while stmt ::= 'while (' Expression ')' Statement
+'  block stmt ::= '{' [ Statement ';' ] * '}'
+'  Expression ::= SimpleExpr [ ( '==' | '!=' | '<' | '>' | '<=' | '>=' | ) SimpleExpr * ] 
+'  SimpleExpr ::= Term   [ ( '+' | '-' | '||' ) Term   * ]
+'  Term       ::= Factor [ ( '*' | '/' | '&&' ) Factor * ] 
+'  Factor     ::= Number 
+                | string
+                | true
+                | false
+                | '-' Term 
+							  | '!' Term
+							  | '(' Expression ')'
+							  | Symbol
+							  | Symbol '=' Expression
+							  | FuncCall
+'  FuncCall   ::= Symbol '(' Args ')'
+'  Args       ::= [ Expression [ ',' Expression ] *  ]
+'---------------------------------------------------------------------------------------------
 
 '  07-02
 '-------------------------------------------------------------------------------------

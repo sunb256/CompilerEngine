@@ -75,6 +75,8 @@ namespace CompilerEngine
     /// <summary> } </summary>
     BLOCK_OPER,
 
+    /// <summary> , </summary>
+    COMMA,
 
 
     /// <summary> Valiable </summary>
