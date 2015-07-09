@@ -72,6 +72,10 @@ namespace CompilerEngine
           result = While_Statement();
           break;
 
+        case TokenType.BLOCK_APER:
+          result = Block_Statement();
+          break;
+
         default:
           result = Expression();
           break;
@@ -102,19 +106,20 @@ namespace CompilerEngine
 
       // 文
       _token.Next();
-      Ast stmt_1 = Statement();
-      Ast stmt_2 = null;
+      Ast stmt_if = Statement();
+      Ast stmt_el = null;
 
       // else 文
       if (_token.Value == TokenType.ELSE)
       {
         _token.Next();
-        stmt_2 = Statement();
+        stmt_el = Statement();
       }
 
-      result = new AstIf(if_cond, stmt_1, stmt_2);
+      result = new AstIf(if_cond, stmt_if, stmt_el);
       return result;
     }
+
 
     // [構文] While文
     private Ast While_Statement()
@@ -139,6 +144,36 @@ namespace CompilerEngine
       Ast stmt = Statement();
 
       result = new AstWhile(while_cond, stmt);
+      return result;
+    }
+
+
+    // [構文] Block文
+    private Ast Block_Statement()
+    {
+      Ast result = null;
+      var codeList = new List<Ast>();
+
+      _token.Next();
+
+      // }
+      while (_token.Value != TokenType.BLOCK_OPER) 
+      {
+        // 文を取得
+        Ast code = Statement();
+        
+        if (_token.Value != TokenType.EOS)
+        {
+          throw new Exception("parser error :: grammer error not ';' in Block_Statement");
+        }
+
+        // 文を格納
+        _token.Next();
+        codeList.Add(code);
+      }
+
+      _token.Next();
+      result = new AstBlock(codeList);
       return result;
     }
 
@@ -197,7 +232,7 @@ namespace CompilerEngine
 
       switch (_token.Value)
       {
-        case TokenType.EOS:    // 空のプログラム
+        case TokenType.EOS:
           result = code;
           break;
 

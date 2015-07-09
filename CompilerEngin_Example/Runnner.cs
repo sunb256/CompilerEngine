@@ -97,6 +97,18 @@ while(x < 5)
   x = x + 1;
 ";
       }
+      else if (selector == 13)
+      {
+        ret = @"
+x = 1;
+y = 0;
+while(x <= 10){
+  y = y + x;
+  x = x + 1;
+};
+y;
+";
+      }
       else
       {
         return "";
@@ -108,7 +120,7 @@ while(x < 5)
     {
       Console.WriteLine("");
       //var items = new int[] { 0, 1, 2, 3, 4 };
-      var items = new int[] {12};
+      var items = new int[] {13};
 
       foreach (var s in items)
       {

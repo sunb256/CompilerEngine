@@ -11,14 +11,14 @@ namespace CompilerEngine
   public class AstIf : Ast
   {
     protected Ast _if_condition;
-    protected Ast _main_body;
-    protected Ast _else_body;
+    protected Ast _if_body;
+    protected Ast _el_body;
 
-    public AstIf(Ast if_condition, Ast main_body, Ast else_body)
+    public AstIf(Ast if_condition, Ast if_body, Ast el_body)
     {
       this._if_condition = if_condition;
-      this._main_body = main_body;
-      this._else_body = else_body;
+      this._if_body = if_body;
+      this._el_body = el_body;
     }
 
     public override Ast Run()
@@ -28,9 +28,9 @@ namespace CompilerEngine
       AstBool b = (AstBool)_if_condition.Run();
 
       if (b.isTrue())
-        code = _main_body;
+        code = _if_body;
       else
-        code = _else_body;
+        code = _el_body;
 
       result = code.Run();
       return result;

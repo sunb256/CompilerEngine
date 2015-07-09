@@ -92,31 +92,6 @@
 
 
 '  06-4
-'-------------------------------------------------------------------------------------
-'  Program             ::= 文 ';'
-'  文                  ::= if文 
-'                        | while文 
-'                        | 式 
-'                        | ブロック文
-'
-'  if文   (if_Stmt)    ::= 'if'    '(' 式 ')' 文 [ 'else' 文 ]
-'  while文(while_Stmt) ::= 'while' '(' 式 ')'
-'  block文(block)      ::= '{' [ 文 ';' ] *  '}'
-'
-'  式  (Expr)          ::= 単純式 [ ( '==' | '!=' | '<' | '>' | '<=' | '>=' | )] 単純式*
-'  単純式 (SimpleExpr) ::= 項     [ ('+' | '-' | '||' ) 項   ] *
-'  項 (Term)           ::= 因子   [ ('*' | '/' | '&&' ) 因子 ] *
-'
-'  因子(Factor)        ::= 数値
-'                        | 文字列
-'                        | 真
-'                        | 偽
-'                        | '-' 因子
-'                        | '!' 因子
-'                        | '(' 式 ')'
-'                        | シンボル
-'                        | シンボル '=' 式
-'-------------------------------------------------------------------------------------
 '---------------------------------------------------------------------------------------------
 '  Program    ::= Expression ';'
 '  Statement  ::= if stmt 
@@ -124,6 +99,30 @@
                 | Expression
 '  if stmt    ::= 'if    (' Expression ')' Statement [ 'else' Statement ]
 '  while stmt ::= 'while (' Expression ')' Statement
+'  Expression ::= SimpleExpr [ ( '==' | '!=' | '<' | '>' | '<=' | '>=' | ) SimpleExpr * ] 
+'  SimpleExpr ::= Term   [ ( '+' | '-' | '||' ) Term   * ]
+'  Term       ::= Factor [ ( '*' | '/' | '&&' ) Factor * ] 
+'  Factor     ::= Number 
+                | string
+                | true
+                | false
+                | '-' Term 
+							  | '!' Term
+							  | '(' Expression ')'
+							  | Symbol
+							  | Symbol '=' Expression
+'---------------------------------------------------------------------------------------------
+
+'  06-5
+'---------------------------------------------------------------------------------------------
+'  Program    ::= Expression ';'
+'  Statement  ::= if stmt 
+                | while stmt
+                | block stmt
+                | Expression
+'  if stmt    ::= 'if    (' Expression ')' Statement [ 'else' Statement ]
+'  while stmt ::= 'while (' Expression ')' Statement
+'  block stmt ::= '{' [ Statement ';' ] * '}'
 '  Expression ::= SimpleExpr [ ( '==' | '!=' | '<' | '>' | '<=' | '>=' | ) SimpleExpr * ] 
 '  SimpleExpr ::= Term   [ ( '+' | '-' | '||' ) Term   * ]
 '  Term       ::= Factor [ ( '*' | '/' | '&&' ) Factor * ] 

@@ -77,6 +77,16 @@ namespace CompilerEngine
             this.Val = this.Char.ToString();
             break;
 
+          case '{':
+            this.Type = TokenType.BLOCK_APER;
+            this.Val = this.Char.ToString();
+            break;
+
+          case '}':
+            this.Type = TokenType.BLOCK_OPER;
+            this.Val = this.Char.ToString();
+            break;
+
           case '=':
 
             this.Val = (string)ScanEqual(ch);

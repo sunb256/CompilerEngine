@@ -69,6 +69,12 @@ namespace CompilerEngine
     /// <summary> ) </summary>
     OPER,
 
+    /// <summary> { </summary>
+    BLOCK_APER,
+
+    /// <summary> } </summary>
+    BLOCK_OPER,
+
 
 
     /// <summary> Valiable </summary>
